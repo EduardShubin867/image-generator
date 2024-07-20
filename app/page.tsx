@@ -16,14 +16,14 @@ export default function Home() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ url }),
             })
+
             if (!response.ok) {
-                throw new Error('Network response was not ok')
+                throw new Error(`HTTP error! status: ${response.status}`)
             }
-            const data: { imageSrc?: string; error?: string } =
-                await response.json()
+
+            const data = await response.json()
             if (data.imageSrc) {
                 setImageSrc(data.imageSrc)
-                setError(null)
             } else {
                 setError(data.error || 'Image source not found')
                 setImageSrc(null)
@@ -55,7 +55,8 @@ export default function Home() {
                     <Image
                         src={imageSrc}
                         alt="Extracted"
-                        style={{ maxWidth: '100%' }}
+                        width={500}
+                        height={500}
                     />
                     <p>Image source: {imageSrc}</p>
                 </div>
