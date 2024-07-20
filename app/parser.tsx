@@ -1,4 +1,10 @@
-export default function Parser({ result }) {
+import React from 'react'
+
+interface ParserProps {
+    result: any // Можно заменить на более конкретный тип, если структура result известна
+}
+
+const Parser: React.FC<ParserProps> = ({ result }) => {
     return (
         <div>
             <h2>Parsed Result:</h2>
@@ -6,3 +12,5 @@ export default function Parser({ result }) {
         </div>
     )
 }
+
+export default Parser
